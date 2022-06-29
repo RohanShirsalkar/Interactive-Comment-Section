@@ -1,5 +1,6 @@
 body {
-  background-color: aliceblue;
+  /* background-color: rgb(235, 235, 235); */
+  background-color: rgb(240, 240, 240);
 }
 
 *{
@@ -17,7 +18,28 @@ body {
 }
 
 
-.commentSection-addComment{
-  position: absolute;
-  bottom: 0;
+
+
+@media only screen and (max-width: 425px){
+  .mainContainer{
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .imageSection{
+    width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+  .commentSection{
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .comments-list{
+    padding: 10px;
+  }
+	.mainContainer{
+    display: block !important;
+  }
 }

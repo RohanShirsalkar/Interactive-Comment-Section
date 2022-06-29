@@ -1,31 +1,49 @@
 import React from 'react'
 import { GoReply } from 'react-icons/go'
+import { MdDeleteForever } from 'react-icons/md'
 
 
-export default function Comments_List_Item() {
+
+export default function Comments_List_Item(props) {
+
+    const handleDeleteFn = () => {
+        const commentId = props.commentId
+        const requsetOptions = {
+            method: "DELETE",
+            headers: { "app-id": "62bae606f5b94f1f28befff7"}
+        }
+        fetch(`https://dummyapi.io/data/v1/comment/${commentId}`,requsetOptions)
+        .then(response => response.json())
+        .then(json => console.log(json))
+    }
+
+
     return (
         <div className='commentSection-listItem card mb-3'>
-            <div class="card-body d-flex">
-                <div className="listItem-btngroup me-3">
-                    <div class="btn-group-vertical btn-group-sm">
-                        <a href="#" class="btn btn-outline-secondary">+</a>
-                        <a href="#" class="btn btn-outline-secondary">2</a>
-                        <a href="#" class="btn btn-outline-secondary">-</a>
+            <div className="card-body">
+                {/* <div className="listItem-btngroup me-3">
+                    <div className="btn-group-vertical btn-group-sm">
+                        <a href="#" className="btn btn-outline-secondary">+</a>
+                        <a href="#" className="btn btn-outline-secondary">2</a>
+                        <a href="#" className="btn btn-outline-secondary">-</a>
                     </div>
-                </div>
+                </div> */}
                 <div>
                     <div className="listItem-nameSection d-flex justify-content-between mb-2">
                         <div>
-                            <span className='me-2'><b>Rohan</b></span>
+                            <span className='me-2'><b>{props.name}</b></span>
                             <span>1 month ago</span>
                         </div>
 
-                        <a className='text-primary text-decoration-none' href='#'><GoReply /> <b>Reply</b></a>
-        
+                        <div>
+                            <a className='text-danger text-decoration-none me-3' onClick={handleDeleteFn} href='#'><MdDeleteForever /> <b>Delete</b></a>
+                            {/* <a className='text-primary text-decoration-none' href='#'><GoReply /> <b>Reply</b></a> */}
+                        </div>
+
                     </div>
 
                     <div className="listItem-comment">
-                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere ipsam accusantium ducimus eaque quam nemo. Rerum earum autem neque deserunt.</p>
+                        <p>{props.message}</p>
                     </div>
 
                 </div>
