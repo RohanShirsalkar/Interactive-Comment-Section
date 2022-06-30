@@ -12,7 +12,7 @@ export default function Comments_List_Item(props) {
             method: "DELETE",
             headers: { "app-id": "62bae606f5b94f1f28befff7"}
         }
-        fetch(`https://dummyapi.io/data/v1/comment/${commentId}`,requsetOptions)
+        fetch(`https://dummyapi.io/data/v1/comment/${commentId}`,requsetOptions)    
         .then(response => response.json())
         .then(json => console.log(json))
     }

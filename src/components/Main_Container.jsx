@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BsHeart } from 'react-icons/bs'
 import { GoComment } from 'react-icons/go'
@@ -12,46 +13,49 @@ export default function Main_Container() {
   const [isLoading, setIsLoading] = useState()
   const [data, setData] = useState() /// Set to Redux
   const [text, setText] = useState() /// Set to Redux
+  const [count, setCount] = useState(0)
 
-  const url = 'https://dummyapi.io/data/v1/user/62bbf6cc0c0f94161ff52de7/comment'
-  // const url = 'https://dummyapi.io/data/v1/comment?limit=10'
+  console.log(count)
 
-
+  const apiData = {
+    getCommentsUrl: 'https://dummyapi.io/data/v1/user/62bbf6cc0c0f94161ff52de7/comment',
+    postCommentUrl: "https://dummyapi.io/data/v1/comment/create",
+    headers: { 'app-id': '62bae606f5b94f1f28befff7' },
+  }
 
   useEffect(() => {
-    setIsLoading(true)
     const getData = async () => {
-      const data = await fetch(url, {
-        method: 'get',
-        headers: {
-          'app-id': '62bae606f5b94f1f28befff7'
-        }
+      setIsLoading(true)
+      await axios({
+        url: apiData.getCommentsUrl,
+        method: "GET",
+        headers: apiData.headers
       })
-      const parsedData = await data.json()
-      setData(parsedData)
+        .then(data => setData(data.data))
+        .catch(error => console.log(error.response.data))
       setIsLoading(false)
     }
     getData()
-  },[])
-
+  }, [count])
 
   const handleSubmitFn = () => {
-    console.log("clicked")
-    const reqOptions = {
-      method: "POST",
-      headers: { "app-id": "62bae606f5b94f1f28befff7" },
-      body: JSON.stringify({
-        "message": {text},
-        "owner": "62bbf6cc0c0f94161ff52de7",
-        "post": "62bbf6cc0c0f94161ff52de7"
-      })
+
+    const commentData = {
+      "message": text,
+      "owner": "62bbf6cc0c0f94161ff52de7",
+      "post": "62bbf6cc0c0f94161ff52de7"
     }
 
-    fetch("https://dummyapi.io/data/v1/comment/create", reqOptions)
-    .then(response => response.json())
-    .then(json => console.log(json))
+    axios({
+      url: apiData.postCommentUrl,
+      method: "POST",
+      headers: apiData.headers,
+      data: commentData
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error.response.data))
+    setCount(count + 1)
   }
-
 
   const commentsArray = data && data.data.map((item) => {
     return <Comments_List_Item key={item.id} name={item.owner.firstName} message={item.message} commentId={item.id} />
@@ -93,7 +97,7 @@ export default function Main_Container() {
 
 
         <Comment_Enter_Box handleSubmitFn={handleSubmitFn} setText={setText} text={text} />
-      
+
       </div>
     </div>
   )
