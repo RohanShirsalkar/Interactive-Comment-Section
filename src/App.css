@@ -25,7 +25,12 @@ body {
     padding: 0 !important;
     margin: 0 !important;
   }
-
+  .imageSectionContainer{
+    width: 100% !important;
+  }
+  .commentSectionContainer{
+    width: 100% !important;
+  }
   .imageSection{
     width: 100% !important;
     margin: 0 !important;

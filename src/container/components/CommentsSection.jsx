@@ -28,7 +28,7 @@ export default function CommentsSection() {
     }
 
     return (
-        <div className="commentSection container position-relative w-50 px-4">
+        <div className="commentSection container position-relative px-4">
             <div className="comments-list overflow-auto position-relative" style={{ height: "80vh" }}>
                 {commentsArray ? commentsArray : <Spinner/>}
             </div>
