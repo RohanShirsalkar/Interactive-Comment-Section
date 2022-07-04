@@ -1,8 +1,4 @@
 import React, { useEffect } from 'react'
-import { BsHeart } from 'react-icons/bs'
-import { GoComment } from 'react-icons/go'
-import { IoPaperPlaneOutline } from 'react-icons/io5'
-import { MdOutlineSaveAlt } from 'react-icons/md'
 import { getPost } from '../../redux/actions/commentAction'
 import { useDispatch, useSelector } from 'react-redux/es/exports'
 import CommentsSection from '../components/CommentsSection'
