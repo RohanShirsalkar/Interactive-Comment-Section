@@ -1,0 +1,9 @@
+const actionType = {
+    GET_POST : "GET_POST",
+    GET_COMMENTS : "GET_COMMENTS",
+    POST_COMMENTS : "POST_COMMENTS",
+    SET_COMMENTS : "SET_COMMENTS",
+    DELETE_COMMENTS : "DELETE_COMMENTS"
+}
+
+export default actionType
